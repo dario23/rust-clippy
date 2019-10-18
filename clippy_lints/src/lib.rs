@@ -260,6 +260,7 @@ pub mod returns;
 pub mod serde_api;
 pub mod shadow;
 pub mod slow_vector_initialization;
+pub mod stabilized_intrinsics;
 pub mod strings;
 pub mod suspicious_trait_impl;
 pub mod swap;
@@ -577,6 +578,7 @@ pub fn register_plugins(reg: &mut rustc_driver::plugin::Registry<'_>, conf: &Con
     reg.register_late_lint_pass(box double_comparison::DoubleComparisons);
     reg.register_late_lint_pass(box question_mark::QuestionMark);
     reg.register_late_lint_pass(box suspicious_trait_impl::SuspiciousImpl);
+    reg.register_late_lint_pass(box stabilized_intrinsics::StabilizedIntrinsics);
     reg.register_early_lint_pass(box cargo_common_metadata::CargoCommonMetadata);
     reg.register_early_lint_pass(box multiple_crate_versions::MultipleCrateVersions);
     reg.register_early_lint_pass(box wildcard_dependencies::WildcardDependencies);
@@ -876,6 +878,7 @@ pub fn register_plugins(reg: &mut rustc_driver::plugin::Registry<'_>, conf: &Con
         returns::UNUSED_UNIT,
         serde_api::SERDE_API_MISUSE,
         slow_vector_initialization::SLOW_VECTOR_INITIALIZATION,
+        stabilized_intrinsics::STABILIZED_INTRINSICS,
         strings::STRING_LIT_AS_BYTES,
         suspicious_trait_impl::SUSPICIOUS_ARITHMETIC_IMPL,
         suspicious_trait_impl::SUSPICIOUS_OP_ASSIGN_IMPL,
